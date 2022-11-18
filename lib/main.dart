@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/home.dart';
 import 'package:news_app/login.dart';
+import 'package:news_app/second.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const Login(),
         Home.route: (context) => const Home(),
+        Country.route: (context) => const Country(),
       },
     );
   }
