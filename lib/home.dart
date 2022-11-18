@@ -61,18 +61,31 @@ class _HomeState extends State<Home> {
       body: Column(
         children: [
           Row(
+
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    _sources = "bbc-news";
-                    _q = false;
-                  });
-                },
-                child: const Text("BBC-News"),
+              SizedBox(
+                height: 50,
+                width: 80,
+                child: FloatingActionButton(
+                  shape: BeveledRectangleBorder(
+                      borderRadius: BorderRadius.zero
+                  ),
+
+                  onPressed: () {
+                    setState(() {
+                      _sources = "bbc-news";
+                      _q = false;
+                    });
+                  },
+                  child: const Text("BBC-News"),
+                  backgroundColor: Colors.white,
+                  tooltip:"For BBC News Only... Click Me!",
+
+                ),
               ),
               SizedBox(
+                height: 40,
                 width: 200,
                 child: TextField(
                   onSubmitted: (value) {
@@ -86,7 +99,8 @@ class _HomeState extends State<Home> {
                   ),
                   decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.search, color: Colors.white),
-                      hintText: "News Keyword",
+                      hintText: "Search here",
+
                       hintStyle: TextStyle(color: Colors.white)),
                 ),
               )
@@ -139,18 +153,16 @@ class _HomeState extends State<Home> {
                         // true;
                         return index < snapshot.data.length
                             ? NewsItem(
-                                name: snapshot.data![index]['source']['name'] ??
-                                    "",
-                                author: snapshot.data![index]['author'] ?? "",
-                                title: snapshot.data![index]['title'] ?? "",
-                                url: snapshot.data![index]['url'] ?? "",
-                                image:
-                                    snapshot.data![index]['urlToImage'] ?? "",
-                                description:
-                                    snapshot.data![index]['description'] ?? "",
-                                content: snapshot.data![index]['content'] ?? "",
-                                time:
-                                    snapshot.data![index]['publishedAt'] ?? "")
+                                name: snapshot.data![index]['source']['name'],
+                                author: snapshot.data![index]['author'],
+                                title: snapshot.data![index]['title'],
+                                url: snapshot.data![index]['url'],
+                                image: snapshot.data![index]['urlToImage'],
+                                time: snapshot.data![index]['publishedAt'],
+                                description: snapshot.data![index]['description'] .substring(0,),
+                                content: snapshot.data![index]['content'] .substring(0,100) + "...\nClick to view more",
+
+                        )
                             : SizedBox(
                                 height: 100,
                                 child: ElevatedButton(

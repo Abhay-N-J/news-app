@@ -15,7 +15,7 @@ class Country extends StatefulWidget {
 }
 
 class _CountryState extends State<Country> {
-  String place = "us";
+  String place = "in";
   Widget appBarTitle = const Text("News App");
   Icon actionIcon = const Icon(Icons.search);
   final Map<String, String> _countries = {
@@ -170,15 +170,15 @@ class _CountryState extends State<Country> {
                         // Axis.vertical;
                         // true;
                         return NewsItem(
-                            name: snapshot.data![index]['source']['name'] ?? "",
-                            author: snapshot.data![index]['author'] ?? "",
-                            title: snapshot.data![index]['title'] ?? "",
-                            url: snapshot.data![index]['url'] ?? "",
-                            image: snapshot.data![index]['urlToImage'] ?? "",
-                            description:
-                                snapshot.data![index]['description'] ?? "",
-                            content: snapshot.data![index]['content'] ?? "",
-                            time: snapshot.data![index]['publishedAt'] ?? "");
+                          name: snapshot.data![index]['source']['name'],
+                          author: snapshot.data![index]['author'],
+                          title: snapshot.data![index]['title'],
+                          url: snapshot.data![index]['url'],
+                          image: snapshot.data![index]['urlToImage'],
+                          time: snapshot.data![index]['publishedAt'],
+                          description: snapshot.data![index]['description'] .substring(0,),
+                          content: snapshot.data![index]['content'] .substring(0,100) + "...\nClick to view more",
+                        );
                       });
                     } else {
                       children = <Widget>[const Text("ERROR")];
