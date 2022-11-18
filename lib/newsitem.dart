@@ -24,33 +24,6 @@ class NewsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async {
-        if (url == null) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: Colors.transparent,
-            behavior: SnackBarBehavior.floating,
-            elevation: 10,
-            content: Container(
-              padding: const EdgeInsets.all(10),
-              height: 70,
-              decoration: const BoxDecoration(
-                color: Colors.pink,
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-              ),
-              child: const Center(
-                child: Text("Page not loaded"),
-              ),
-            ),
-          ));
-        } else {
-          final uri = Uri.parse(url ?? "");
-          if (await canLaunchUrl(uri)) {
-            await launchUrl(uri);
-          } else {
-            throw 'Could not launch $url';
-          }
-        }
-      },
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
@@ -85,6 +58,33 @@ class NewsItem extends StatelessWidget {
           Text("Source: $name"),
         ]),
       ),
+      onTap: () async {
+        if (url == null) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.transparent,
+            behavior: SnackBarBehavior.floating,
+            elevation: 10,
+            content: Container(
+              padding: const EdgeInsets.all(10),
+              height: 70,
+              decoration: const BoxDecoration(
+                color: Colors.pink,
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+              ),
+              child: const Center(
+                child: Text("Page not loaded"),
+              ),
+            ),
+          ));
+        } else {
+          final uri = Uri.parse(url ?? "");
+          if (await canLaunchUrl(uri)) {
+            await launchUrl(uri);
+          } else {
+            throw 'Could not launch $url';
+          }
+        }
+      },
     );
   }
 }

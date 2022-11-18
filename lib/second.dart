@@ -126,10 +126,10 @@ class _CountryState extends State<Country> {
               "News from ${_countries.keys.firstWhere((element) => _countries[element] == place, orElse: () => null.toString())}"),
           Center(
             child: SizedBox(
-              // height: MediaQuery.of(context).size.height,
-              // width: MediaQuery.of(context).size.width,
-              height: 550.0,
-              width: 600.0,
+              height: MediaQuery.of(context).size.height - 120,
+              width: MediaQuery.of(context).size.width,
+              // height: 550.0,
+              // width: 600.0,
               child: FutureBuilder(
                   future: countries(place),
                   builder: (context, snapshot) {

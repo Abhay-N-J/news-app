@@ -133,32 +133,32 @@ class _HomeState extends State<Home> {
                       //   children: children,
                       // ));
                     } else if (snapshot.hasData) {
-                      return ListView.builder(itemBuilder: (context, index) {
-                        // scrollDirection:
-                        // Axis.vertical;
-                        // true;
-                        return index < snapshot.data.length
-                            ? NewsItem(
-                                name: snapshot.data![index]['source']['name'] ??
-                                    "",
-                                author: snapshot.data![index]['author'] ?? "",
-                                title: snapshot.data![index]['title'] ?? "",
-                                url: snapshot.data![index]['url'] ?? "",
-                                image:
-                                    snapshot.data![index]['urlToImage'] ?? "",
-                                description:
-                                    snapshot.data![index]['description'] ?? "",
-                                content: snapshot.data![index]['content'] ?? "",
-                                time:
-                                    snapshot.data![index]['publishedAt'] ?? "")
-                            : SizedBox(
-                                height: 100,
-                                child: ElevatedButton(
-                                  onPressed: () => setState(() {}),
-                                  child: const Text("Go Back on top"),
-                                ),
-                              );
-                      });
+                      return SizedBox(
+                        child: ListView.builder(
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (context, index) {
+                              // scrollDirection:
+                              // Axis.vertical;
+                              // true;
+                              return NewsItem(
+                                  name: snapshot.data![index]['source']
+                                          ['name'] ??
+                                      "",
+                                  author: snapshot.data![index]['author'] ?? "",
+                                  title: snapshot.data![index]['title'] ?? "",
+                                  url: snapshot.data![index]['url'] ?? "",
+                                  image:
+                                      snapshot.data![index]['urlToImage'] ?? "",
+                                  description: snapshot.data![index]
+                                          ['description'] ??
+                                      "",
+                                  content:
+                                      snapshot.data![index]['content'] ?? "",
+                                  time: snapshot.data![index]['publishedAt'] ??
+                                      "");
+                            }),
+                            
+                      );
                     } else {
                       children = <Widget>[const Text("ERROR")];
                     }
