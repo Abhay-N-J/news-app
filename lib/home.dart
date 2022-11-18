@@ -63,16 +63,25 @@ class _HomeState extends State<Home> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    _sources = "bbc-news";
-                    _q = false;
-                  });
-                },
-                child: const Text("BBC-News"),
+              SizedBox(
+                height: 50,
+                width: 80,
+                child: FloatingActionButton(
+                  shape: const BeveledRectangleBorder(
+                      borderRadius: BorderRadius.zero),
+                  onPressed: () {
+                    setState(() {
+                      _sources = "bbc-news";
+                      _q = false;
+                    });
+                  },
+                  backgroundColor: Colors.white,
+                  tooltip: "For BBC News Only... Click Me!",
+                  child: const Text("BBC-News"),
+                ),
               ),
               SizedBox(
+                height: 40,
                 width: 200,
                 child: TextField(
                   onSubmitted: (value) {
@@ -86,7 +95,7 @@ class _HomeState extends State<Home> {
                   ),
                   decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.search, color: Colors.white),
-                      hintText: "News Keyword",
+                      hintText: "Search here",
                       hintStyle: TextStyle(color: Colors.white)),
                 ),
               )
@@ -133,32 +142,62 @@ class _HomeState extends State<Home> {
                       //   children: children,
                       // ));
                     } else if (snapshot.hasData) {
-                      return SizedBox(
-                        child: ListView.builder(
-                            itemCount: snapshot.data.length,
-                            itemBuilder: (context, index) {
-                              // scrollDirection:
-                              // Axis.vertical;
-                              // true;
-                              return NewsItem(
-                                  name: snapshot.data![index]['source']
-                                          ['name'] ??
-                                      "",
-                                  author: snapshot.data![index]['author'] ?? "",
-                                  title: snapshot.data![index]['title'] ?? "",
-                                  url: snapshot.data![index]['url'] ?? "",
-                                  image:
-                                      snapshot.data![index]['urlToImage'] ?? "",
-                                  description: snapshot.data![index]
-                                          ['description'] ??
-                                      "",
-                                  content:
-                                      snapshot.data![index]['content'] ?? "",
-                                  time: snapshot.data![index]['publishedAt'] ??
-                                      "");
-                            }),
-                            
-                      );
+                      // return SizedBox(
+                      //   child: ListView.builder(
+                      //       itemCount: snapshot.data.length,
+                      //       itemBuilder: (context, index) {
+                      //         // scrollDirection:
+                      //         // Axis.vertical;
+                      //         // true;
+                      //         return NewsItem(
+                      //             name: snapshot.data![index]['source']
+                      //                     ['name'] ??
+                      //                 "",
+                      //             author: snapshot.data![index]['author'] ?? "",
+                      //             title: snapshot.data![index]['title'] ?? "",
+                      //             url: snapshot.data![index]['url'] ?? "",
+                      //             image:
+                      //                 snapshot.data![index]['urlToImage'] ?? "",
+                      //             description: snapshot.data![index]
+                      //                     ['description'] ??
+                      //                 "",
+                      //             content:
+                      //                 snapshot.data![index]['content'] ?? "",
+                      //             time: snapshot.data![index]['publishedAt'] ??
+                      //                 "");
+                      //       }),
+
+                      // );
+
+                      return ListView.builder(itemBuilder: (context, index) {
+                        // scrollDirection:
+                        // Axis.vertical;
+                        // true;
+                        return index < snapshot.data.length
+                            ? NewsItem(
+                                name: snapshot.data![index]['source']['name'],
+                                author: snapshot.data![index]['author'],
+                                title: snapshot.data![index]['title'],
+                                url: snapshot.data![index]['url'],
+                                image: snapshot.data![index]['urlToImage'],
+                                time: snapshot.data![index]['publishedAt'],
+                                description: snapshot.data![index]
+                                        ['description']
+                                    .substring(
+                                  0,
+                                ),
+                                content: snapshot.data![index]['content']
+                                        .substring(0, 100) +
+                                    "...\nClick to view more",
+                              )
+                            : SizedBox(
+                                height: 100,
+                                child: ElevatedButton(
+                                  onPressed: () => setState(() {}),
+                                  child: const Text("Go Back on top"),
+                                ),
+                              );
+                      });
                     } else {
                       children = <Widget>[const Text("ERROR")];
                     }
