@@ -24,39 +24,53 @@ class NewsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          Image.network(
-            image!,
-            fit: BoxFit.fill,
-            frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: child,
-              );
-            },
-            loadingBuilder: (BuildContext context, Widget child,
-                ImageChunkEvent? loadingProgress) {
-              if (loadingProgress == null) return child;
-              return const Center(
-                child: CircularProgressIndicator(
-                    // value: loadingProgress.expectedTotalBytes != null
-                    //     ? loadingProgress.cumulativeBytesLoaded /
-                    //         loadingProgress.expectedTotalBytes!
-                    //     : null,
-                    ),
-              );
-            },
-            errorBuilder: (context, error, stackTrace) {
-              return Image.asset('images/Image_Not_Found.jpeg');
-            },
-          ),
-          Text("Title: $title"),
-          Text("Description: $description"),
-          Text("Content: $content"),
-          Text("Source: $name"),
-        ]),
+      child: Container(
+        decoration: BoxDecoration(
+            border: Border.all(
+                color: Colors.orangeAccent,
+                width: 5,
+                style: BorderStyle.solid)),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+            Image.network(
+              image!,
+              fit: BoxFit.fill,
+              frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: child,
+                );
+              },
+              loadingBuilder: (BuildContext context, Widget child,
+                  ImageChunkEvent? loadingProgress) {
+                if (loadingProgress == null) return child;
+                return const Center(
+                  child: CircularProgressIndicator(
+                      // value: loadingProgress.expectedTotalBytes != null
+                      //     ? loadingProgress.cumulativeBytesLoaded /
+                      //         loadingProgress.expectedTotalBytes!
+                      //     : null,
+                      ),
+                );
+              },
+              errorBuilder: (context, error, stackTrace) {
+                return Image.asset('images/Image_Not_Found.jpeg');
+              },
+            ),
+            Text("Title: $title",
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                  fontSize: 20,
+                  // decoration: TextDecoration()
+                )),
+            Text("Description: $description"),
+            Text("Content: $content"),
+            Text("Source: $name"),
+          ]),
+        ),
       ),
       onTap: () async {
         if (url == null) {

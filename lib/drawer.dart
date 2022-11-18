@@ -11,16 +11,21 @@ class MyDrawer extends StatelessWidget {
       child: ListView(
         padding: const EdgeInsets.all(10),
         children: [
+          const SizedBox(
+            height: 69,
+          ),
           ListTile(
             title: const Text("Headlines"),
             onTap: () {
-              Navigator.of(context).pushNamedAndRemoveUntil(Home.route, (route) => false);
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil(Home.route, (route) => false);
             },
           ),
           ListTile(
             title: const Text("Country News"),
             onTap: () {
-              Navigator.of(context).pushNamedAndRemoveUntil(Country.route, (route) => false);
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil(Country.route, (route) => false);
             },
           )
         ],

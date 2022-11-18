@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:news_app/home.dart';
 
 class Login extends StatefulWidget {
+  static const route = 'login';
   const Login({super.key});
   @override
   State<Login> createState() => _LoginState();
@@ -15,6 +16,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as String?;
     return Center(
         child: Scaffold(
       appBar: AppBar(title: const Text("Login"), elevation: 16.0),
@@ -115,6 +117,9 @@ class _LoginState extends State<Login> {
                 //     });
                 // }
                 // });
+                if (args?.toString() == "true") {
+                  AuthenticationHelper().signOut();
+                }
                 AuthenticationHelper()
                     .signIn(email: _email, password: _passwd)
                     .then((result) {
