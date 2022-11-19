@@ -97,6 +97,7 @@ class _CountryState extends State<Country> {
                       appBarTitle = TextField(
                         onSubmitted: (value) {
                           setState(() {
+                            value = value.trim();
                             // place = _countries[value]!;
                             place = _countries[
                                 "${value[0].toUpperCase()}${value.substring(1).toLowerCase()}"]!;
@@ -113,7 +114,7 @@ class _CountryState extends State<Country> {
                       );
                     } else {
                       actionIcon = const Icon(Icons.search);
-                      appBarTitle = const Text("News App");
+                      appBarTitle = const Text("The News App");
                     }
                   });
                 },
@@ -189,33 +190,32 @@ class _CountryState extends State<Country> {
                               // scrollDirection:
                               // Axis.vertical;
                               // true;
-      
+
                               return index != snapshot.data.length
                                   ? NewsItem(
                                       name: snapshot.data![index]['source']
                                               ['name'] ??
-                                          "",
-                                      author:
-                                          snapshot.data![index]['author'] ?? "",
-                                      title: snapshot.data![index]['title'] ?? "",
-                                      url: snapshot.data![index]['url'] ?? "",
-                                      image: snapshot.data![index]
-                                              ['urlToImage'] ??
-                                          "",
-                                      time: snapshot.data![index]
-                                              ['publishedAt'] ??
-                                          "",
+                                          "NA",
+                                      author: snapshot.data![index]['author'] ??
+                                          "NA",
+                                      title: snapshot.data![index]['title'] ??
+                                          "NA",
+                                      url: snapshot.data![index]['url'] ?? "NA",
+                                      image: snapshot.data![index]['urlToImage'] ??
+                                          "NA",
+                                      time: snapshot.data![index]['publishedAt'] ??
+                                          "NA",
                                       description: snapshot.data![index]
                                                   ['description'] ==
                                               null
-                                          ? ""
+                                          ? "NA"
                                           : snapshot.data![index]['description']
                                               .substring(
                                               0,
                                             ),
                                       content: snapshot.data![index]['content'] ==
                                               null
-                                          ? ""
+                                          ? "NA"
                                           : snapshot.data![index]['content']
                                                       .length >=
                                                   100

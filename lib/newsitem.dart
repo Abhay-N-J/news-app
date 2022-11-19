@@ -27,9 +27,7 @@ class NewsItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             border: Border.all(
-                color: Colors.orangeAccent,
-                width: 5,
-                style: BorderStyle.solid)),
+                color: Colors.white, width: 5, style: BorderStyle.solid)),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child:
@@ -66,7 +64,12 @@ class NewsItem extends StatelessWidget {
                   fontSize: 20,
                   // decoration: TextDecoration()
                 )),
-            Text("Description: $description"),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Description: $description",
+              ),
+            ),
             Text("Content: $content"),
             Text("Source: $name"),
           ]),
